@@ -54,6 +54,7 @@ $ git clone <远程仓库的网址> -b <分支名称> <本地目录>
  git clone -o <自定义远程仓库名称>
 
 ```
+![Alt text](./images/git-clone.png)
 
 Git 的 clone 命令会自动将远程仓库命名为 origin，拉取它的所有数据， 创建一个指向它的 master 分支的指针，并且在本地将其命名为 origin/master。 
 
