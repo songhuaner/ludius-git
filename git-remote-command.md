@@ -69,6 +69,13 @@ Git 也会给你一个与 origin 的 master 分支在指向同一个地方的本
 
 
 ### 远程分支
+远程分支，即为远程仓库中的普通分支
+
+![Alt text](./images/git-remote-branch.png)
+
+#### 远程追踪分支
+以<远程仓库名>/<远程分支名>的形式命名，如 ludius-git/master。
+
 
 
 #### 上游分支
@@ -210,22 +217,37 @@ $ giit push --f
 ```
 
 #### 提取远程分支 git fetch  
-1. git fetch 
 
- 这将更新git remote 中所有的远程仓库(repository) 所包含分支的最新commit-id, 将其记录到.git/FETCH_HEAD文件中
+##### FETCH_HEAD
+![Alt text](./images/git-FETCH_HEAD.png)
 
-2. git fetch remote_repository
+<B>FETCH_HEAD 指的是某个分支在远程仓库上最新的状态。</B>
+每一个执行过 git fetch 操作的本地仓库都会存在一个 FETCH_HEAD 列表，这个列表保存在 .git/FETCH_HEAD 文件中。
+FETCH_HEAD 文件中的每一行对应着远程仓库的一个分支。
+当前本地分支指向的 FETCH_HEAD 就是该文件中的「第一行」对应的分支。
 
- 这将更新名称为remote_repository 的远程repository上的所有branch的最新commit-id，将其记录。 
 
-3. git fetch remote_repository remote_branch_name
+##### 拉取「所有远程仓库」所包含的分支到本地，并在本地创建或更新远程分支。
+##### 所有分支最新的 Commit-ID 都会记录在 .git/FETCH_HEAD 文件中，若有多个分支，FETCH_HEAD 内会多行数据.
 
- 这将更新名称为remote_repository 的远程repository上的分支： remote_branch_name
+```
+$ git fetch 
+```
+##### 拉取远程仓库的所包含的分支到本地，FETCH_HEAD 设定同上。
+```
+$ git fetch <远程仓库>
+```
 
-4. git fetch remote_repository remote_branch_name:local_branch_name 
+##### 拉取远程仓库中指定的远程分支到本地，且 FETCH_HEAD文件中，只记录远程仓库中指定的远程分支最新的 Commit-ID。
+```
+$ git fetch <远程仓库> <远程分支>
+```
 
-这将更新名称为remote_repository 的远程repository上的分支： remote_branch_name ，并在本地创建local_branch_name 本地分支保存远端分支的所有数据。
+##### 拉取远程仓库中指定远程分支到本地，
+##### ETCH_HEAD 记录了远程仓库指定的远程分支最新的 Commit-ID
+##### 基于远程仓库的远程分支创建一个本地分支
+```
+git fetch <远程仓库> <远程分支>:<本地分支>
+```
 
-FETCH_HEAD： 是一个版本链接，记录在本地的一个文件中，指向目前已经从远程仓库取下来的分支的末端版本。
-
-#### 拉取远程分支 git pull (fetch+merge)
+#### 拉取远程分支 git pull (git fetch + git merge FETCH_HEAD)
