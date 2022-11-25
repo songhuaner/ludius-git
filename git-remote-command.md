@@ -209,7 +209,7 @@ $ giit push --force
 $ giit push --f
 ```
 
-#### 拉取远程分支 git fetch  
+#### 提取远程分支 git fetch  
 1. git fetch 
 
  这将更新git remote 中所有的远程仓库(repository) 所包含分支的最新commit-id, 将其记录到.git/FETCH_HEAD文件中
@@ -228,4 +228,4 @@ $ giit push --f
 
 FETCH_HEAD： 是一个版本链接，记录在本地的一个文件中，指向目前已经从远程仓库取下来的分支的末端版本。
 
-#### git pull 远程分支与本地分支同步
+#### 拉取远程分支 git pull (fetch+merge)
