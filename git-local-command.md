@@ -519,3 +519,8 @@ $ git checkout --orphan <分支名称>
 
 #### 本地分支 合并
 merge，rebase，cherry-pick，patch
+
+
+##### 冲突
+Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容，
+<<<<<<<HEAD是指主分支修改的内容，>>>>>>> dev是指dev分支上修改的内容

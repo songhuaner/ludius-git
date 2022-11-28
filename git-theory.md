@@ -6,15 +6,22 @@
 执行 git init 时，Git 会创建一个 .git 目录。包含以下目录
 ![Alt text](./images/git-files.png)
 
-四个重要的文件或目录：
+重要的文件或目录：
 
 - objects 目录存储所有数据内容
 - refs 目录存储指向数据 (分支) 的提交对象的指针
 - HEAD 文件指向当前分支
 - index 文件保存了暂存区域信息
+- config 配置文件
 
 
 ### git 哈希
+```
+$ git hash-object
+
+```
+作用:
+<b>使用指定文件的内容（可以在工作树之外）计算具有指定类型的对象的对象ID值，并可选择将结果对象写入对象数据库。将其对象ID报告给其标准输出</b>
 
 
 
@@ -26,12 +33,12 @@
 
 
 
-#### git add 命令原理
 
 
 
 
-### 对象
+
+### git 对象
 
 
 ![Alt text](./images/git-objects.png)
@@ -48,10 +55,7 @@ git中所有对象都存储在 <b>.git/objects</b> 目录下
 - blob：对文件内容的记录
 
 
-
-
-
-### 引用
+### git 引用
 
 <b>存储位置: .git/refs</b>
 
@@ -89,19 +93,31 @@ remotes/origin/master
 
 总结：知道了这4类reference的含义，以及命名方式之后，我们对各类git名称，会有更深刻的理解。
 
-##### 具体引用 refspec
-它其实是一种格式，git通过这种格式来表示本地分支与远程分支的映射关系
+### refspec
+一种格式，git通过这种格式来表示本地分支与远程分支的映射关系
+```
+[+]＜src＞:＜dst＞
+
+[+] : 可选  即使不能快速演进的情况下，也去强制更新它
+<src> ： 参数表示本地仓库的源分支
+<dst> ： 参数则表示处于远程仓库中的目标分支
+```
+
+![Alt text](./images/git-config.png)
+
+```
+[remote "ludius-git"]
+        url = git@github.com:songhuaner/ludius-git.git
+        fetch = +refs/heads/*:refs/remotes/ludius-git/*
+```
 
 查看本地分支与远程分支映射关系
 ```
 #### 通过git branch -vv 查看本地与远程分支的关联情况
 ```
+![Alt text](./images/git-branch-vv.png)
 
-#### 本地远程仓库
-
-
-
-
+#### git add 命令原理
 
 ### git commit原理
 
