@@ -418,21 +418,34 @@ index 904fd78..c88ab22 100644
 
 ### 撤销
 
+
+![Alt text](./images/git-local-reset.png)
+
+
 #### git checkout
+将目标文件从暂存区或本地仓库中的文件检出，覆盖工作区的目标文件
 ```
-有两种情况：
-- 修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
-- 已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
-$ git checkout <文件路径>
+$ git checkout -- <文件路径>
 ```
-#### git rm
+
 #### git restore
+Git 2.23 版本之后新加的，用来分担之前 git checkout 命令的功能，作用就是用暂存区或者版本库中的文件覆盖本地文件的修改可以达到回退修改的目的，同时也可以使用版本库中的文件覆盖暂存区的文件，达到回退git add 命令的目的,不会影响分支记录的，就是相当于之前的 git checkout 命令重新检出一份文件来覆盖本地的修改。
+
+<不影响提交记录>
+```
+git restore --staged <file>
+
+git restore <file>
+```
+
+
 
 
 #### git reset
-
+![Alt text](./images/git-reset.png)
 
 #### git revert
 
 
 
+#### git rm
