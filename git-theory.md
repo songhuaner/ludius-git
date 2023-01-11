@@ -1,4 +1,3 @@
-
 # git 原理
 
 ### 仓库文件夹
@@ -22,12 +21,6 @@ $ git hash-object
 ```
 作用:
 <b>使用指定文件的内容（可以在工作树之外）计算具有指定类型的对象的对象ID值，并可选择将结果对象写入对象数据库。将其对象ID报告给其标准输出</b>
-
-
-
-
-
-
 
 ### 索引 index
 
@@ -98,7 +91,7 @@ remotes/origin/master
 ```
 [+]＜src＞:＜dst＞
 
-[+] : 可选  即使不能快速演进的情况下，也去强制更新它
+[+] : 可选  即使不能快速演进的情况下，也去强制更新它q
 <src> ： 参数表示本地仓库的源分支
 <dst> ： 参数则表示处于远程仓库中的目标分支
 ```
@@ -117,7 +110,10 @@ remotes/origin/master
 ```
 ![Alt text](./images/git-branch-vv.png)
 
-#### git add 命令原理
 
-### git commit原理
+### git branch 命令原理
+
+### git add 命令原理
+
+### git commit 命令原理
 

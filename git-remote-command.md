@@ -73,7 +73,7 @@ Git 也会给你一个与 origin 的 master 分支在指向同一个地方的本
 
 ![Alt text](./images/git-remote-branch.png)
 
-#### 远程追踪分支
+#### 远程追踪分支/跟踪分支
 以<远程仓库名>/<远程分支名>的形式命名，如 ludius-git/master。
 
 
