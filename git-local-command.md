@@ -425,23 +425,37 @@ index 904fd78..c88ab22 100644
 #### git checkout
 将目标文件从暂存区或本地仓库中的文件检出，覆盖工作区的目标文件
 ```
-$ git checkout -- <文件路径>
+$ git checkout [commit-id] -- <file>
 ```
 
 #### git restore
 Git 2.23 版本之后新加的，用来分担之前 git checkout 命令的功能，作用就是用暂存区或者版本库中的文件覆盖本地文件的修改可以达到回退修改的目的，同时也可以使用版本库中的文件覆盖暂存区的文件，达到回退git add 命令的目的,不会影响分支记录的，就是相当于之前的 git checkout 命令重新检出一份文件来覆盖本地的修改。
 
-<不影响提交记录>
-```
-git restore --staged <file>
+<B/>不影响提交记录
 
+```
 git restore <file>
+// 如果已添加到暂存区，执行后，将暂存区版本覆盖工作区版本
+// 如果已提交到仓库，执行后，将仓库版本覆盖工作区版本
+
+git restore --staged <file>
+// 如果已添加到暂存区，执行后，暂存区版本不覆盖工作区版本，
+// 撤销git add 操作，暂存区版本移除，文件状态为已修改未添加到暂存区状态
 ```
-
-
-
 
 #### git reset
+
+重新设置HEAD指针指向
+
+```
+git reset <commit-id> --soft
+
+git reset <commit-id> --mixed
+
+git reset <commit-id> --hard
+
+```
+
 ![Alt text](./images/git-reset.png)
 
 #### git revert
