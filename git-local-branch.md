@@ -49,7 +49,7 @@ $ git checkout --orphan <分支名称>
 ```
 
 
-#### git switch
+#### git switch 切换分支 (Git 2.23)
 
 #### 本地分支 合并
 merge，rebase，cherry-pick，patch

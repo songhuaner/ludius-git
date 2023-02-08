@@ -445,21 +445,50 @@ git restore --staged <file>
 
 #### git reset
 
-重新设置HEAD指针指向
+将当前的分支重设(reset)到指定的 commit-id 或者 HEAD，并且根据 [mode] 有可能更新索引和工作目录
+
+mode :
+- hard 
+- soft
+- mixed
+
+```
+git reset [--hard|soft|mixed] [<commit>或HEAD] [file]
+```
+
 
 ```
 git reset <commit-id> --soft
+```
+![Alt text](./images/git-reset-soft.png)
 
+
+```
 git reset <commit-id> --mixed
+```
+![Alt text](./images/git-reset-mixed.png)
 
+
+
+```
 git reset <commit-id> --hard
 
 ```
+![Alt text](./images/git-reset-hard.png)
 
-![Alt text](./images/git-reset.png)
+
+
+
+
 
 #### git revert
 
 
 
 #### git rm
+
+
+
+### 暂存
+
+git stash

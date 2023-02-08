@@ -27,6 +27,11 @@ $ git remote rename <原远程仓库的别名> <新的别名>
 # 删除指定名称的远程仓库
 $ git remote remove <远程仓库的别名>
 
+
+```
+#### 远程仓库地址修改
+
+```
 # 修改远程仓库的 URL 地址
 $ git remote set-url <远程仓库的别名> <新的远程仓库URL地址>
 
@@ -36,7 +41,20 @@ $ git remote set-url --add <远程仓库的别名> <新的远程仓库URL地址>
 
 # 修改push时，远程仓库的地址
 $ git remote set-url --push <远程仓库的别名> <远程仓库URL地址>
+
 ```
+
+执行 git remote -v 
+远程仓库的地址分为fetch(拉取)和push(推送)
+通过 "git remote set-url --push" 可以修改 push地址，可以实现从一个仓库拉取,推送给另一个仓库
+
+```
+PS D:\git-repository\md-ludius\git> git remote -v
+ludius-git      git@github.com:songhuaner/ludius-git.git (fetch)
+ludius-git      git@github.com:songhuaner/ludius-git.git (push)
+
+```
+
 
 
 ### 克隆远程仓库
@@ -211,6 +229,7 @@ $ git push -u origin master
 ```
 
 ##### 强制推送
+将本地历史覆盖到远端仓库
 ```
 $ giit push --force
 $ giit push --f
@@ -244,10 +263,28 @@ $ git fetch <远程仓库> <远程分支>
 ```
 
 ##### 拉取远程仓库中指定远程分支到本地，
-##### ETCH_HEAD 记录了远程仓库指定的远程分支最新的 Commit-ID
+##### FETCH_HEAD 记录了远程仓库指定的远程分支最新的 Commit-ID
 ##### 基于远程仓库的远程分支创建一个本地分支
 ```
 git fetch <远程仓库> <远程分支>:<本地分支>
 ```
 
 #### 拉取远程分支 git pull (git fetch + git merge FETCH_HEAD)
+
+
+##### 拉取远程分支 <远程主机名>/<远程分支名> 内容到本地，并与 <本地分支名> 合并
+```
+git pull <远程主机名> <远程分支名>:<本地分支名>
+```
+
+
+##### 拉取远程分支 <远程主机名>/<远程分支名> 内容到本地，并与 当前本地分支(HEAD) 合并
+```
+git pull <远程主机名> <远程分支名>
+```
+
+##### 自动拉取当前本地分支对应的上游远程分支，并合并
+```
+git pull <远程主机名>
+```
+
