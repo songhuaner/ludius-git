@@ -98,6 +98,10 @@ $ git config <--local | --global | --system> --unset <name>
 
 ```
 
+#### 别名
+
+
+
 ### 工作流程
 
 ![Alt text](./images/git-flow.jpg)
@@ -129,7 +133,7 @@ git init [project-name]
 ![Alt text](./images/git-local-def-branch-2.png)
 
 在未创建master分支前，不能创建其他分支
-![Alt text](./images/git-local-def-branch-3.png)
+![Alt text](./images/git-local-def-branch-3.png) 
 
 #### HEAD master branch 指针 与 分支
 - HEAD：永远自动指向当前commit的指针。
@@ -430,7 +434,10 @@ $ git checkout [commit-id] -- <file>
 ```
 
 #### git restore 另存
-Git 2.23 版本之后新加的，用来分担之前 git checkout 命令的功能，作用就是用暂存区或者版本库中的文件覆盖本地文件的修改可以达到回退修改的目的，同时也可以使用版本库中的文件覆盖暂存区的文件，达到回退git add 命令的目的,不会影响分支记录的，就是相当于之前的 git checkout 命令重新检出一份文件来覆盖本地的修改。
+Git 2.23 版本之后新加的，用来分担之前 git checkout 命令的功能
+作用就是用暂存区或者版本库中的文件覆盖本地文件的修改可以达到回退修改的目的，
+同时也可以使用版本库中的文件覆盖暂存区的文件，达到回退git add 命令的目的,
+不会影响分支记录的，就是相当于之前的 git checkout 命令重新检出一份文件来覆盖本地的修改。
 
 <B/>不影响提交记录
 
@@ -446,7 +453,7 @@ git restore --staged <file>
 
 #### git reset 重置
 
-将当前的分支重设(reset)到指定的 commit-id 或者 HEAD，并且根据 [mode] 有可能更新索引和工作目录
+将当前的分支重设(reset)到指定的 commit-id 或者 HEAD，并且根据 [mode] 更新索引或工作目录
 
 mode :
 - hard  
@@ -481,7 +488,8 @@ git reset <commit-id> --hard
 
 
 #### git revert 反转
-
+git revert是提交一个新的版本，将需要revert的版本的内容再反向修改回去，
+版本会递增，不影响之前提交的内容
 
 git revert --continue
 
@@ -489,7 +497,7 @@ git revert --quit
 
 git revert --abort
 
-git-revert 
+git revert 
 
 
 #### git rm  删除文件
@@ -508,6 +516,13 @@ git rm -r <directory>
  git rm --cached <file>
 ```
 
+#### git mv  移动文件
+
+
+
 
 ### git stash 暂存
 
+
+
+### git tag 标签
