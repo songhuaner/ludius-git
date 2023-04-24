@@ -135,6 +135,9 @@ git init [project-name]
 
 ![Alt text](./images/git-status-command.png)
 
+#### 提示可push的commit
+![Alt text](./images/git-status-push.png)
+
 作用：
 git status 命令用于显示工作目录和暂存区的状态。
 
