@@ -1,5 +1,24 @@
 ### 本地分支
 
+#### 默认本地分支 master
+新创建完成的仓库，没有分支
+![Alt text](./images/git-local-def-branch-1.png)
+
+首次提交后，才会真正创建默认分支master
+![Alt text](./images/git-local-def-branch-2.png)
+
+在未创建master分支前，不能创建其他分支
+![Alt text](./images/git-local-def-branch-3.png) 
+
+#### HEAD master branch 指针 与 分支
+- HEAD：永远自动指向当前commit的指针。
+
+- master：默认分支指针， 新创建的仓库（repository）是没有任何commit的，但在创建第一个commit时会把master指向它, HEAD指向master。
+
+- branch：分支指针， 切换分支后， HEAD指向当前分支
+
+![Alt text](./images/git-pointer.png)
+
 #### 本地分支  操作
 ```
 # 创建新分支，新的分支基于上一次提交建立, 不切换到新建的分支

@@ -96,10 +96,16 @@ $ git config <--local | --global | --system> --get <name>
 # 删除配置项
 $ git config <--local | --global | --system> --unset <name>
 
+# 配置别名
+$ git config <--local | --global | --system> alias.ci commit
+git ci 等同于 git commit
+
+Git 只是简单地将别名替换为对应的命令。 
+要执行外部命令，而不是一个 Git 子命令, 在命令前面加入 ! 符号
+
+# 删除别名
+$ git config <--local | --global | --system> --unset alias.ci
 ```
-
-#### 别名
-
 
 
 ### 工作流程
@@ -124,26 +130,6 @@ git init
 #### 在一个目录下新建本地仓库
 git init [project-name] 
 ```
-
-### 默认本地分支 master
-新创建完成的仓库，没有分支
-![Alt text](./images/git-local-def-branch-1.png)
-
-首次提交后，才会真正创建默认分支master
-![Alt text](./images/git-local-def-branch-2.png)
-
-在未创建master分支前，不能创建其他分支
-![Alt text](./images/git-local-def-branch-3.png) 
-
-#### HEAD master branch 指针 与 分支
-- HEAD：永远自动指向当前commit的指针。
-
-- master：默认分支指针， 新创建的仓库（repository）是没有任何commit的，但在创建第一个commit时会把master指向它, HEAD指向master。
-
-- branch：分支指针， 切换分支后， HEAD指向当前分支
-
-![Alt text](./images/git-pointer.png)
-
 
 ### git status  文件状态
 
