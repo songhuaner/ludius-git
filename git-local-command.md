@@ -264,7 +264,7 @@ git clean
 - f ：强制运行
 - x ：删除没有被 track 的文件
 
-### git show
+
 
 
 ### git diff 展示差异
@@ -403,11 +403,25 @@ index 904fd78..c88ab22 100644
 // 绿色字表示 与修改前有区别的地方
 ```
 
+### git show
 
+### git mv  移动文件
 
-#### git mv  移动文件
+### git rm  删除文件
 
+同时删除暂存区、工作区的文件，并且将这次删除放入暂存区
+```
+git rm <file>
 
+// 删除目录
+
+git rm -r <directory>
+```
+
+删除暂存区文件，但保留工作区的文件，并且将这次删除放入暂存区
+```
+ git rm --cached <file>
+```
 
 
 ### git stash 暂存
