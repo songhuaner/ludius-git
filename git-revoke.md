@@ -7,8 +7,11 @@
 
 
 #### git checkout 检出
+
+<B>各分支共享暂存区和工作区</B>
+
 将目标文件从暂存区或本地仓库中的文件检出，覆盖工作区的目标文件
-各分支共享暂存区和工作区，在commit改动之前，每个分支看到的文件情况相同，如果执行stash指令，在其他分支中指保留新建文件操作。
+在commit改动之前，每个分支看到的文件情况相同，如果执行stash指令，在其他分支中只保留新建文件操作。
 ```
 $ git checkout [commit-id] -- <file>
 ```
@@ -29,6 +32,23 @@ git restore <file>
 git restore --staged <file>
 // 如果已添加到暂存区，执行后，暂存区版本不覆盖工作区版本，
 // 撤销git add 操作，暂存区版本移除，文件状态为已修改未添加到暂存区状态
+
+
+1、文件在暂存区且未作修改的情况
+
+使用git restore --staged <file> 把文件从暂存区移动到工作区，即文件不被追踪；
+
+2、文件在暂存区且已经修改的情况
+
+使用git restore --staged <file> 把文件从暂存区移动到工作区，且不会撤销修改的内容；
+
+使用git restore <file> 文件仍在暂存区且会撤销文件修改的内容；
+
+3、文件在本地代码库已经修改的情况
+
+使用git add <file> 把文件重新放到暂存区，且保留文件的修改；
+
+使用git restore <file> 文件仍在本地代码库且会撤销文件的修改；
 ```
 
 #### git reset 重置
@@ -57,6 +77,7 @@ git reset <commit-id> --soft
 ```
 git reset <commit-id> --mixed
 ```
+
 ![Alt text](./images/git-reset-mixed.png)
 
 
