@@ -96,7 +96,17 @@ $ git config <--local | --global | --system> --get <name>
 # 删除配置项
 $ git config <--local | --global | --system> --unset <name>
 
+# 配置别名
+$ git config <--local | --global | --system> alias.ci commit
+git ci 等同于 git commit
+
+Git 只是简单地将别名替换为对应的命令。 
+要执行外部命令，而不是一个 Git 子命令, 在命令前面加入 ! 符号
+
+# 删除别名
+$ git config <--local | --global | --system> --unset alias.ci
 ```
+
 
 ### 工作流程
 
@@ -121,29 +131,12 @@ git init
 git init [project-name] 
 ```
 
-### 默认本地分支 master
-新创建完成的仓库，没有分支
-![Alt text](./images/git-local-def-branch-1.png)
-
-首次提交后，才会真正创建默认分支master
-![Alt text](./images/git-local-def-branch-2.png)
-
-在未创建master分支前，不能创建其他分支
-![Alt text](./images/git-local-def-branch-3.png)
-
-#### HEAD master branch 指针 与 分支
-- HEAD：永远自动指向当前commit的指针。
-
-- master：默认分支指针， 新创建的仓库（repository）是没有任何commit的，但在创建第一个commit时会把master指向它, HEAD指向master。
-
-- branch：分支指针， 切换分支后， HEAD指向当前分支
-
-![Alt text](./images/git-pointer.png)
-
-
 ### git status  文件状态
 
 ![Alt text](./images/git-status-command.png)
+
+#### 提示可push的commit
+![Alt text](./images/git-status-push.png)
 
 作用：
 git status 命令用于显示工作目录和暂存区的状态。
@@ -257,47 +250,9 @@ git commit -am [massage]
 
 #### 追加提交
 #### 在不增加一个新的 commit-id 的情况下将新修改的代码追加到前一次的 commit-id 中
+#### 对之前的commit 提交进行修改,把新的内容添加到之前的commit里面,这个命令没有添加新的提交，而是用新提交取代了原始提交。
 git commit --amend 
 ```
-
-### .gitignore 文件
-没有被git纳入管理的文件/文件夹，并且不期望其出现在未追踪文件列表中，可以通过.gitignore 文件，配置可以忽略的文件名称模式，git将根据配置的模式，忽略匹配的文件。
-
-#### glob模式
-```
-"*"：星号匹配零个或多个任意字符
-[]：匹配任何一个列在方括号中的字符，如[ab]匹配a或者匹配b
-"?"：问号匹配一个任意字符
-[n-m]：匹配所有在这两个字符范围内的字符，如[0-9]表示匹配所有0到9的数字
-```
-####  格式规范
-- 行注释符号 #, 以#符号开头的行 或者 空行， git不解析
-- 可以使用标准的 glob 模式匹配
-- 匹配模式最后跟斜杠(/)说明要忽略的是目录
-- 要忽略指定模式以外的文件或目录，可以在模式前加上感叹号(!)进行取反
-
-#### 示例
-```
-logs/：忽略当前路径下的logs目录，包含logs下的所有子目录和文件
-
-/logs.txt：忽略根目录下的logs.txt文件
-
-*.class：忽略所有后缀为.class的文件
-
-!/classes/a.class：不忽略classes目录下的a.class文件
-
-tmp/*.txt：只忽略tmp目录下的.txt文件
-
-**/foo：可以忽略/foo, a/foo, a/b/foo等
-
-```
- #### 全局 .gitignore 文件配置
- ```
-$ git config --global core.excludesfile ~/.gitignore
- ```
-#### .gitignore 文件失效
-<B> .gitignore只能忽略没有被track的文件，如果已经被纳入了版本管理中，则修改.gitignore是无效的</B>
-
 
 ### git clean 删除所有未跟踪的文件
 ```
@@ -308,6 +263,9 @@ git clean
 - d ：删除未被添加到 git 路径中的文件（将 .gitignore 文件标记的文件全部删除）
 - f ：强制运行
 - x ：删除没有被 track 的文件
+
+
+
 
 ### git diff 展示差异
 
@@ -406,116 +364,69 @@ $ git diff 版本号1 版本号2 src
 
 
 
-#### 不同分支之间的差异
+#### git diff 命令执行后内容解析
 ```
-Git diff branch1 branch2 --stat   //显示出所有有差异的文件列表
+diff --git a/git-github.md b/git-github.md
+// 要对比文件的版本
+// a表示修改前的版本， b表示修改后的版本
 
-Git diff branch1 branch2 文件名(带路径)   //显示指定文件的详细差异
+index 904fd78..c88ab22 100644
+// 对比文件的hash值
+// 索引区文件hash(904fd78)  工作区文件hash(c88ab22)
+// 文件权限(644)
 
-Git diff branch1 branch2                   //显示出所有有差异的文件的详细差异
+--- a/git-github.md
++++ b/git-github.md
+// --- 表示 修改前
+// +++ 表示 修改后
 
-git diff [local branch] origin/[remote branch] 比较本地分支和远程分支的区别
-```
-
-
-### 撤销
-
-#### 撤销工作区文件修改
-```
-有两种情况：
-- 修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
-- 已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
-$ git checkout <文件路径>
-```
-
-### 查看日志
-
-![Alt text](./images/git-log-1.png)
-
-#### git log 查看提交历史
-
-使用git log命令只可以查看到HEAD指针及其之前的版本信息,git log命令是显示当前的HEAD和它的祖先。
-
-```
-git log
-```
+@@ -1,3 +1,5 @@
+// 标识修改范围
+// - 标识修改前  +标识 修改后
+// 1,3 表示(开始行，偏移量) ，行号范围[1,3], 即从第一行到第三行
+// -1,3 修改前的内容范围，从第一行开始到第三行
+// +1,5 修改后的内容范围，从第一行开始到第5行
 
 
-#### 显示 ASCII 图形表示的分支合并历史。
+ # github
 
-```
-git log --graph	
-```
-##### 符号解释
-```
-* ：表示一次提交
-| ：表示分支提交路径
-/ ：新建分支
-\ : 分支合并
+-#### 修改1
+\ No newline at end of file
++
++
++### 修改222
+\ No newline at end of file
+
+// 修改的内容
+// - 表示 修改后删除的内容(红色表示)
+// + 表示 修改后新增的内容
+// 绿色字表示 与修改前有区别的地方
 ```
 
+### git show
+ 命令用于显示各种类型的对象，对于提交，它显示日志消息和文本差异，对于标签，它显示标签消息和引用对象。
+ 
+### git mv  移动文件
 
+### git rm  删除文件
 
+同时删除暂存区、工作区的文件，并且将这次删除放入暂存区
+```
+git rm <file>
 
-#### git reflog 查看引用日志
+// 删除目录
 
-查看到所有历史版本信息。
+git rm -r <directory>
+```
+
+删除暂存区文件，但保留工作区的文件，并且将这次删除放入暂存区
+```
+ git rm --cached <file>
 ```
 
 
-```
+### git stash 暂存
 
 
 
-### 本地分支
-
-#### 本地分支  操作
-```
-# 创建新分支，新的分支基于上一次提交建立, 不切换到新建的分支
-$ git branch <分支名>
-
-# 列出本地的所有分支，当前所在分支以 "*" 标出
-$ git branch
-
-# 列举远程分支
-$ git branch -r
-
-# 列举所有分支 包含远程分支
-$ git branch -a
-
-# 列出本地的所有分支并显示最后一次提交，当前所在分支以 "*" 标出
-$ git branch -v
-
-# 修改分支名称
-# 如果不指定原分支名称则为当前所在分支
-$ git branch -m [<原分支名称>] <新的分支名称>
-
-# 强制修改分支名称
-$ git branch -M [<原分支名称>] <新的分支名称>
-
-# 删除指定的本地分支
-$ git branch -d <分支名称>
-
-# 强制删除指定的本地分支
-$ git branch -D <分支名称>
-
-```
-
-#### git checkout 分支切换
-
-创建分支和切换分支，撤销变更
-
-```
-#### 切换到已存在的指定分支
-$ git checkout <分支名称>
-
-#### 创建并切换到指定的分支，保留所有的提交记录
-$ git checkout -b <分支名称>
-
-#### 创建并切换到指定的分支，删除所有的提交记录
-$ git checkout --orphan <分支名称>
-
-```
-
-#### 本地分支 合并
-merge，rebase，cherry-pick，patch
+### git tag 标签
